@@ -11,13 +11,11 @@ head = (
     "</center>"
 )
 
-ref = "Find the whole code [here](https://github.com/ovh/ai-training-examples/tree/main/apps/gradio/sketch-recognition)."
 
 img_size = 28
 labels = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 model = tf.keras.models.load_model("number_recognition_model_colab.keras")
-
 
 def predict(img):
     try:
@@ -25,25 +23,40 @@ def predict(img):
         if not isinstance(img, np.ndarray):
             img = np.array(img)
 
-        # Ensure the image has a single channel (grayscale)
-        if img.ndim == 2:
+        # Print shape and type of the input image
+        print(f"Initial image type: {type(img)}, shape: {img.shape}")
+
+        # Ensure the image is in grayscale and has a single channel
+        if img.ndim == 3 and img.shape[-1] == 3:
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        elif img.ndim == 2:
             img = np.expand_dims(img, axis=-1)
 
-        # Print the type and shape of the image
-        print(type(img), img.shape)
+        # Print the shape of the grayscale image
+        print(f"Grayscale image shape: {img.shape}")
 
         # Resize the image
         img = cv2.resize(img, (img_size, img_size))
+
+        # Normalize the image
+        img = img.astype('float32') / 255.0
         img = img.reshape(1, img_size, img_size, 1)
+
+        # Print the shape after resizing and normalizing
+        print(f"Processed image shape: {img.shape}")
+
         preds = model.predict(img)[0]
+
+        # Print the predictions
+        print("Predictions:", preds)
+
         return {label: float(pred) for label, pred in zip(labels, preds)}
     except Exception as e:
         # Print the exception to the console
         print(f"Error during prediction: {e}")
         return {"Error": str(e)}
 
-
 label = gr.Label(num_top_classes=3)
 
-interface = gr.Interface(fn=predict, inputs="sketchpad", outputs=label, title=title, description=head, article=ref)
-interface.launch()
+interface = gr.Interface(fn=predict, inputs="sketchpad", outputs=label, title=title, description=head)
+interface.launch(debug=True)
