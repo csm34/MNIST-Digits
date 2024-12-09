@@ -1,5 +1,7 @@
 # MNIST Digit Recognition Model
 
+https://huggingface.co/spaces/cisemh/Mnist-Digits
+
 This project implements a deep learning model for digit recognition using the MNIST dataset. The model is built with TensorFlow and Keras, and it uses a Convolutional Neural Network (CNN) architecture to classify handwritten digits from 0 to 9. The model is trained on the MNIST dataset and evaluated on a test set to predict the accuracy of the classification.
 
 
