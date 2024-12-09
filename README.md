@@ -1,55 +1,113 @@
-# MNIST Digit Recognition Model
+# MNIST Digit Recognition Project
 
-https://huggingface.co/spaces/cisemh/Mnist-Digits
+This repository contains code for training, evaluating, and deploying a convolutional neural network (CNN) to recognize handwritten digits from the MNIST dataset. The project includes the following features:
 
-This project implements a deep learning model for digit recognition using the MNIST dataset. The model is built with TensorFlow and Keras, and it uses a Convolutional Neural Network (CNN) architecture to classify handwritten digits from 0 to 9. The model is trained on the MNIST dataset and evaluated on a test set to predict the accuracy of the classification.
+- Training a CNN model using TensorFlow and Keras.
+- Saving the trained model for future use.
+- Building an interactive web application using Gradio for digit recognition.
 
+Hugging face space: https://huggingface.co/spaces/cisemh/Mnist-Digits
 
-## Project Overview
-
-The goal of this project is to classify images of handwritten digits using a Convolutional Neural Network (CNN). The model is trained on the MNIST dataset, which contains 60,000 training images and 10,000 testing images of handwritten digits. After training, the model's performance is evaluated on the test set, and the accuracy is reported.
-
-## Setup Instructions
-
-1. **Clone this repository** to your local machine:
-
-    ```bash
-    git clone https://github.com/csm34/MNIST-Digits.git
-    cd MNIST-Digits
-    ```
-
-2. **Install dependencies**:
-
-    Ensure that you have Python 3.x and the following libraries installed:
-
-    - TensorFlow
-    - Matplotlib
-    - Numpy
-    - Pandas
-
-    You can install the dependencies using `pip`:
-
-    ```bash
-    pip install tensorflow matplotlib numpy pandas
-    ```
+---
 
 ## Dataset
 
-This project uses the **MNIST** dataset, which consists of 28x28 grayscale images of handwritten digits from 0 to 9. The dataset is available in TensorFlow and Keras and is loaded using:
+The model is trained and tested on the MNIST dataset, a standard dataset in machine learning that consists of grayscale images of handwritten digits (0-9). Each image is 28x28 pixels.
 
+- **Training Set:** 60,000 images
+- **Test Set:** 10,000 images
+
+## File Structure
+
+### 1. `mnist-digits.ipynb`
+This Jupyter Notebook contains:
+- Loading and preprocessing the MNIST dataset.
+- Defining and training a CNN model.
+- Evaluating the model’s performance.
+- Saving the model in `.keras` and `.pkl` formats.
+
+### 2. `app.py`
+This Python script uses Gradio to create a web-based interface where users can draw digits and get predictions from the trained model.
+
+- **Dependencies:**
+  - Gradio v3.50.2
+  - TensorFlow
+  - NumPy
+  - Matplotlib
+
+- **Features:**
+  - Load the trained model.
+  - Predict the digit drawn by the user on a canvas.
+
+## Installation and Usage
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Virtual environment (optional but recommended)
+
+### Setup
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/csm34/MNIST-Digits.git
+   cd MNIST-Digits
+   ```
+
+2. Install required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the Jupyter Notebook to train and save the model (if not already done):
+   ```bash
+   jupyter notebook mnist-digits.ipynb
+   ```
+
+4. Launch the Gradio app:
+   ```bash
+   python app.py
+   ```
+
+### Interacting with the Application
+
+- The Gradio interface will open in your web browser.
+- Use the canvas to draw a digit (0-9).
+- The app will predict the digit and display the top 3 predictions with their probabilities.
 
 ## Model Architecture
-The model is a simple Convolutional Neural Network (CNN) built using the Keras API:
 
-- Conv2D Layer: 28 filters of size 3x3 with ReLU activation.
-- MaxPooling2D Layer: Pooling with a 2x2 window.
-- Flatten Layer: Flattens the output of the convolutional layers to a 1D vector.
-- Dense Layer: Fully connected layer with 128 units and ReLU activation.
-- Output Layer: Fully connected output layer with 10 units (one for each digit) and softmax activation.
+The CNN model has the following layers:
+1. Conv2D: 28 filters, kernel size (3, 3), ReLU activation
+2. MaxPooling2D: Pool size (2, 2)
+3. Flatten: Converts 2D features into a 1D vector
+4. Dense: 128 units, ReLU activation
+5. Dense: 10 units (output layer), softmax activation
 
-## Training the Model
-The model is trained using the Adam optimizer and sparse categorical cross-entropy loss function. 
-It is trained for 10 epochs with a batch size of 64. The training process includes both training and validation on the test set.
+### Training Parameters
+- Optimizer: Adam
+- Loss Function: Sparse Categorical Crossentropy
+- Metrics: Accuracy
+- Epochs: 10
+- Batch Size: 64
+
+### Results
+
+- *Final Test Accuracy: 98.27%
+- Test Error Rate: 1.31%
+
+## Requirements
+
+- TensorFlow
+- NumPy
+- Matplotlib
+- Gradio v3.50.2
+
+You can install the dependencies using the command:
+```bash
+pip install tensorflow numpy matplotlib gradio==3.50.2
+```
+
 
 
 ## License
