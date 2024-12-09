@@ -1,9 +1,4 @@
-tensorboard==2.18.0
-tensorboard-data-server==0.7.2
-tensorflow==2.18.0
-numpy==2.0.2
-pillow==11.0.0
-gradio==3.0.10
-gradio_client==1.5.1
-opencv-python==4.10.0.84
-opencv-python-headless==4.10.0.84
+gradio==3.50.2
+numpy
+keras
+tensorflow
