@@ -93,7 +93,7 @@ The CNN model has the following layers:
 
 ### Results
 
-- *Final Test Accuracy: 98.27%
+- Final Test Accuracy: 98.27%
 - Test Error Rate: 1.31%
 
 ## Requirements
